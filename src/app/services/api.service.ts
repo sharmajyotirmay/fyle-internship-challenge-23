@@ -6,14 +6,15 @@ import { tap, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-
   constructor(
-    private httpClient: HttpClient
-  ) { }
+    private http: HttpClient
+  ) {}
 
   getUser(githubUsername: string) {
-    return this.httpClient.get(`https://api.github.com/users/${githubUsername}`);
+    return this.http.get(`https://api.github.com/users/${githubUsername}`);
   }
-
+  getRepo(githubUsername: string, pageNumber : number, perPage : number) {
+    return this.http.get(`https://api.github.com/users/${githubUsername}/repos?per_page=${perPage}&page=${pageNumber}`)
+  }
   // implement getRepos method by referring to the documentation. Add proper types for the return type and params 
 }

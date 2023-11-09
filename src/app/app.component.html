@@ -1,5 +1,65 @@
-<div class="grid h-screen place-items-center">
-  <div class="font-bold text-3xl">
-    Fyle Internship Challenge
-  </div>
+<div class="main-github-cont">
+    <div class="input-field w-100 h-100 flex-col">
+      <div class="enter-data-field w-100 flex justify-center p-10 gap-10">
+
+        <input
+        class="border border-2"
+        #newUser
+        [(ngModel)]="user"
+        (keyup.enter)="getUserData(user)"
+        (blur) = "getUserData(user); newUser.value = ''"
+        />
+        
+        <Button class="primary border px-3 rounded" type="primary" (click)="getGithub(user, 1, pageCount)">Get Data</Button>
+      </div>
+      <div class="set-page-count flex justify-between p-10">
+        <div class="div gap-5 flex">
+          <label for="pageCount">Per Page</label>
+          <select name="pageCount" #page_count [(ngModel)]="pageCount" (change) = "getGithub(user, pageNumber, pageCount)">
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="20">20</option>
+            <option [ngValue]="30">30</option>
+            <option [ngValue]="40">40</option>
+            <option [ngValue]="100">100</option>
+          </select>
+        </div>
+        <div class="btn-group flex gap-10" id="radioBtn">
+          <a class="btn btn-primary btn-sm notActive border px-5 bg-orange-300 rounded" (click)="getGithub(user, goPrev(), pageCount)"> Previous </a>
+            
+          <a class="btn btn-primary btn-sm notActive bg-orange-300 rounded px-5" (click)="getGithub(user, goNext(), pageCount)">Next </a>
+        </div>
+      </div>
+        <ul class="flex flex-wrap">
+            <li class="flex-col p-5 gap-4 border gap-5 p-5 m-5 rounded" style="flex: 1 1 30%;" *ngFor="let item of repos">
+              <div>
+                <h1 class="text-lg">{{item.name}}</h1>
+                <p class="text-sm">{{item.description}}</p>
+              </div>
+            </li>
+        </ul>
+    </div>
+    <!-- <div class="row">
+        <div class="col-2">
+          <div class="dataTables_length"><label>Show
+              <select [(ngModel)]="filterObj.PageSize" (change)="filetrCandidates('')">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select> entries</label>
+          </div>
+        </div>
+        <div class="col-md-10" style="float:right;text-align: right">
+          <div class="paginations">
+            <div>
+              <div class="btn-group" id="radioBtn">
+                <a class="btn btn-primary btn-sm notActive" (click)="onPrevious()"> Previous </a>
+                <a class="btn btn-primary btn-sm active">{{filterObj.PageNumber}}</a>
+                <a class="btn btn-primary btn-sm notActive" (click)="onNext()">Next </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
 </div>
